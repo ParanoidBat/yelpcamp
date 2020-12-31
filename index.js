@@ -73,8 +73,10 @@ db.once('open', ()=>{
     console.log('Database connected')
 })
 
-app.listen(3000, ()=>{
-    console.log('Listening on 3000')
+const port = process.env.PORT || 3000
+
+app.listen(port, ()=>{
+    console.log(`Listening on ${port}`)
 })
 
 app.use((req, res, next)=>{
