@@ -1,0 +1,46 @@
+<% layout('/layouts/boilerplate') %>
+
+<div class="row">
+    <h1 class="text-center">Update Campground</h1>
+    <div class="col-6 offset-3">
+        <form method="POST" action="/campgrounds/<%= camp._id %>?_method=PUT" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Name</label>
+                <input class="form-control" type="text" name="title" id="title" value="<%= camp.title %>" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="price">Price</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price-label">$</span>
+                    <input class="form-control" type="number" name="price" id="price" value="<%= camp.price %>" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" name="location" id="location" value="<%= camp.location %>">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" name="description" id="description"><%= camp.description %></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Image</label>
+                <input type="file" class="form-control" name="image" id="image" multiple>
+            </div>
+            <div class="mb-3">
+                <% camp.images.forEach((image, i)=>{ %>
+                    <img src="<%= image.thumbnail %>" class="img-thumbnail">
+                    
+                    <div class="form-check-inline">
+                        <input type="checkbox" id="image-<%= i %>" value="<%= image.filename %>" name="deleteImages[]">
+                    </div>
+                    <label for="image-<%= i %>">Delete</label>
+                <% }) %> 
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-info">Update</button>
+            </div>
+        </form>
+        <a href="/campgrounds/<%= camp.id %>" class="btn btn-warning">Cancel</a>
+    </div>
+</div>
